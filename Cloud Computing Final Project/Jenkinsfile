@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Joey-The-Human/cloud-Computing-Final-Project.git'
+            }
+        }
+
+        stage('Deploy to S3') {
+            steps {
+                withAWS(region: 'us-east-2', credentials: 'aws-jenkins-creds') {
+                    sh '''
+                        aws s3 cp index.html s3://cloud-computing-project-demo/index.html --cache-control "no-cache"
+                        aws s3 sync Resources s3://cloud-computing-project-demo/Resources --delete --cache-control "max-age=86400"
+                    '''
+                }
+            }
+        }
+
+        stage('Invalidate CloudFront Cache') {
+            steps {
+                withAWS(region: 'us-east-2', credentials: 'aws-jenkins-creds') {
+                    sh '''
+                        aws cloudfront create-invalidation \
+                        --distribution-id YOUR_DISTRIBUTION_ID \
+                        --paths "/*"
+                    '''
+                }
+            }
+        }
+    }
+}
