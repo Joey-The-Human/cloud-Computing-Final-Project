@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Joey-The-Human/cloud-Computing-Final-Project.git'
@@ -32,3 +33,4 @@ pipeline {
         }
     }
 }
+
