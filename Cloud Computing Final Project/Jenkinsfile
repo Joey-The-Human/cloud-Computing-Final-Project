@@ -13,8 +13,8 @@ pipeline {
             steps {
                 withAWS(region: 'us-east-2', credentials: 'aws-jenkins-creds') {
                     bat """
-                        aws s3 cp index.html s3://cloud-computing-project-demo/index.html --cache-control "no-cache"
-                        aws s3 sync Resources s3://cloud-computing-project-demo/Resources --delete --cache-control "max-age=86400"
+                        aws s3 cp index.html s3://cloud-final-joel/index.html --cache-control "no-cache"
+                        aws s3 sync Resources s3://cloud-final-joel/Resources --delete --cache-control "max-age=86400"
                     """
                 }
             }
