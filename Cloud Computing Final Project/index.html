@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Joel Bowman</title>
+  <link rel="stylesheet" href="indexStyle.css">
+  <script>
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark-mode");
+    }
+  </script>
+</head>
+<body>
+  <div class="layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <h1>Joel Bowman</h1>
+      </div>
+
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="social">
+        <a href="https://github.com/Joey-The-Human" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/joel-bowman" target="_blank">LinkedIn</a>
+      </div>
+    </aside>
+
+    <!-- Main Homepage Content -->
+    <main class="content">
+      <section class="intro">
+        <h2>Welcome</h2>
+      <div class="intro-flex">
+      <div class="profile-image">
+        <img src="Images/IMG_20251017_160713 (1).jpg" alt="Profile photo of Joel Bowman" />
+      </div>
+      <div class="intro-text">
+        <p>Hello! I’m Joel Bowman, a Computer Science student at UW–Green Bay with a Software Engineering emphasis and a minor in Business Administration. I’m passionate about building scalable systems, responsive design, and integrating business strategy into technical solutions.</p>
+      <div class="buttons">
+      <a href="projects.html" class="btn">View Projects</a>
+      <a href="Resume/Resume%20(Joel%20Bowman).docx" class="btn" download>Download Résumé</a>
+      <!--<button id="mode-toggle" class="btn" aria-label="Toggle light/dark mode">🌙</button>-->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      <section class="highlights">
+        <h2>Highlights</h2>
+        <ul>
+          <li>Designed and deployed a modular personal website with responsive layout and theme toggling.</li>
+          <li>Configured DNS records and routed domains for self‑hosted services.</li>
+          <li>Earned High Honors multiple semesters for top academic performance.</li>
+        </ul>
+      </section>
+      <section class="about-me">
+        <h2>About Me</h2>
+        <p>
+        I’m Joel Bowman, a Computer Science student at the University of Wisconsin–Green Bay, 
+        specializing in Software Engineering with a minor in Business Administration. 
+        I enjoy building scalable, maintainable systems and refining infrastructure for reliability. 
+        Outside of academics, I experiment with 3D printing, custom hardware builds, and self‑hosted apps. 
+       My goal is to bridge technical expertise with business strategy to create solutions that are both 
+      innovative and practical.
+      </p>
+      </section>
+
+
+      <footer>
+        <p>&copy; 2025 Joel Bowman</p>
+      </footer>
+    </main>
+  </div>
+  <script src="MainScript.js"></script>
+</body>
+</html>

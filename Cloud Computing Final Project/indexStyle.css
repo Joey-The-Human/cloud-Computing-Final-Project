@@ -1,0 +1,280 @@
+/* ============================= */
+/* ====== Light Mode Styles ===== */
+/* ============================= */
+
+.intro-flex {
+  display: flex;
+  align-items: center;
+  gap: 2rem;          /* space between image and text */
+  flex-wrap: wrap;    /* allows stacking on smaller screens */
+  margin-top: 1rem;
+}
+
+.profile-image img {
+  max-width: 180px;   /* control image size */
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.intro-text {
+  flex: 1;            /* text takes remaining space */
+  min-width: 250px;   /* ensures readability on small screens */
+}
+
+
+body {
+  background: #e6ecf2;
+  color: #0a1f44; /* navy blue for base text */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #d3dce6;
+  color: #0a1f44;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* This centers all child elements horizontally */
+  padding: 2rem 1rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center; /* Optional: centers text inside elements */
+}
+
+.sidebar .logo {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.sidebar nav a {
+  display: block;
+  margin: 1rem 0;
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  color: #4b6cb7; /* soft blue accent */
+}
+
+.sidebar .social {
+  margin-top: auto;
+}
+
+.sidebar .social a {
+  display: block;
+  margin: 0.5rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Content Area */
+.content {
+  margin-left: 250px; /* same as sidebar width */
+  padding: 3rem;
+  flex: 1;
+  background: #e6ecf2; /* lighter slate gray */
+  color: #0a1f44;
+}
+
+.content section {
+  background: #ffffff;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h1, h2 {
+  color: #0a1f44;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+h2 {
+  border-left: 5px solid #4b6cb7;
+  padding-left: 10px;
+}
+
+.btn {
+  display: flex;              /* flex so text centers inside */
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: #0a1f44;
+  color: #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid #0a1f44;
+  transition: background 0.3s, border-color 0.3s;
+  margin: 0;                  /* remove leftover margins */
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;    /* centers the group */
+  flex-wrap: wrap;
+  gap: 1rem;                  /* consistent spacing */
+  margin-top: 1rem;
+  width: 100%;                /* ensure container spans full width */
+}
+
+
+.btn:hover {
+  background: #143d6b; /* slightly lighter navy */
+  border-color: #143d6b;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: #0a1f44;
+  font-size: 0.9rem;
+}
+
+/* ============================= */
+/* ====== Dark Mode Styles ===== */
+/* ============================= */
+
+body.dark-mode {
+  background: #e6ecf2; /* lightest base gray behind content */
+  color: #ffffff;
+}
+
+/* Sidebar stays black */
+body.dark-mode .sidebar {
+  background: #000000;
+  color: #f0f0f0;
+}
+
+body.dark-mode .sidebar nav a.active,
+body.dark-mode .sidebar nav a:hover {
+  color: #00cccc; /* teal accent */
+}
+
+/* Content area uses second-darkest gray */
+body.dark-mode .content {
+  background: #2a2a2a; /* dark gray body background */
+  color: #ffffff;
+}
+
+/* Each section styled with white text and teal borders */
+body.dark-mode .content section {
+  background: #2a2a2a; /* same as content for seamless look */
+  color: #ffffff;
+  border: 1px solid #00cccc; /* teal accent border */
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: none; /* cleaner in dark mode */
+}
+
+/* Headings with teal accent */
+body.dark-mode h1,
+body.dark-mode h2 {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+body.dark-mode h2 {
+  border-left: 5px solid #00cccc;
+  padding-left: 10px;
+}
+
+/* Buttons with teal background */
+body.dark-mode .btn {
+  background: #00cccc;
+  color: #1c1c1c;
+  border: 1px solid #00cccc;
+}
+
+body.dark-mode .btn:hover {
+  background: #00e5ff;
+  border-color: #00e5ff;
+}
+
+/* Footer muted */
+body.dark-mode footer {
+  color: #cccccc;
+}
+
+/* ============================================== */
+/* ====== Changes side bar for mobile users ===== */
+/* ============================================== */
+
+@media (max-width: 768px) {
+  /* Sidebar becomes a top nav bar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;          /* full width across the top */
+    height: 60px;         /* fixed height for nav bar */
+    flex-direction: row;  /* horizontal layout */
+    justify-content: center; /* center nav links */
+    align-items: center;
+    padding: 0 1rem;
+    text-align: center;
+    z-index: 1000;
+  }
+
+  /* Hide the logo/name on mobile */
+  .sidebar .logo {
+    display: none;
+  }
+
+  /* Nav links go inline */
+  .sidebar nav {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .sidebar nav a {
+    margin: 0;
+  }
+
+  /* Hide socials */
+  .sidebar .social {
+    display: none;
+  }
+
+  /* Content no longer offset by sidebar */
+  .content {
+    margin-left: 0;
+    margin-top: 60px; /* push content below top nav */
+    padding: 1rem;
+  }
+
+  /* Center buttons under intro text */
+  .buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .buttons .btn {
+    margin-right: 0;
+  }
+}
+
+
