@@ -1,35 +1,56 @@
 pipeline {
     agent any
 
-    stages {
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')      // Jenkins credential ID
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')  // Jenkins credential ID
+        AWS_DEFAULT_REGION = 'us-east-2'
+        BUCKET_NAME = 'cloud-final-joel'
+        CLOUDFRONT_DIST_ID = 'E3ABCXYZ123'  // Replace with your actual ID
+    }
 
+    stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Joey-The-Human/cloud-Computing-Final-Project.git'
             }
         }
 
-        stage('Deploy to S3') {
+        stage('Deploy HTML/CSS/JS to S3') {
             steps {
-                withAWS(region: 'us-east-2', credentials: 'aws-jenkins-creds') {
-                    bat """
-                        aws s3 cp index.html s3://cloud-final-joel/index.html --cache-control "no-cache"
-                        aws s3 sync Resources s3://cloud-final-joel/Resources --delete --cache-control "max-age=86400"
-                    """
-                }
+                sh '''
+                aws s3 cp index.html s3://$BUCKET_NAME/index.html --acl public-read
+                aws s3 cp style.css s3://$BUCKET_NAME/style.css --acl public-read
+                aws s3 cp script.js s3://$BUCKET_NAME/script.js --acl public-read
+                '''
+            }
+        }
+
+        stage('Sync Resources Folder') {
+            steps {
+                sh '''
+                aws s3 sync Resources/ s3://$BUCKET_NAME/Resources/ --acl public-read
+                '''
             }
         }
 
         stage('Invalidate CloudFront Cache') {
             steps {
-                withAWS(region: 'us-east-2', credentials: 'aws-jenkins-creds') {
-                    bat """
-                        aws cloudfront create-invalidation ^
-                        --distribution-id YOUR_DISTRIBUTION_ID ^
-                        --paths "/*"
-                    """
-                }
+                sh '''
+                aws cloudfront create-invalidation \
+                  --distribution-id $CLOUDFRONT_DIST_ID \
+                  --paths "/*"
+                '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo ' Deployment complete. Site is live at https://joelbowman.org'
+        }
+        failure {
+            echo ' Deployment failed. Check logs for errors.'
         }
     }
 }
