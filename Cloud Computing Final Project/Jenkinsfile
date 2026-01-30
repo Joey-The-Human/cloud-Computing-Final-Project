@@ -2,17 +2,20 @@ pipeline {
     agent any
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AKIAQI7VGS5MSMF5PDOZ')      // Jenkins credential ID
-        AWS_SECRET_ACCESS_KEY = credentials('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')  // Jenkins credential ID
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION = 'us-east-2'
         BUCKET_NAME = 'cloud-final-joel'
-        CLOUDFRONT_DIST_ID = 'E293OVOVYITHO5'  // actual ID
+        CLOUDFRONT_DIST_ID = 'E293OVOVYITHO5'
     }
 
     stages {
+
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Joey-The-Human/cloud-Computing-Final-Project.git'
+                git branch: 'main',
+                    credentialsId: 'github-creds',
+                    url: 'https://github.com/Joey-The-Human/cloud-Computing-Final-Project.git'
             }
         }
 
@@ -47,11 +50,10 @@ pipeline {
 
     post {
         success {
-            echo ' Deployment complete. Site is live at https://joelbowman.org'
+            echo 'Deployment complete. Site is live at https://joelbowman.org'
         }
         failure {
-            echo ' Deployment failed. Check logs for errors.'
+            echo 'Deployment failed. Check logs for errors.'
         }
     }
 }
-
