@@ -24,10 +24,10 @@ pipeline {
                 bat """
                 aws s3 cp "Cloud Computing Final Project/index.html" s3://%BUCKET_NAME%/index.html
                 aws s3 cp "Cloud Computing Final Project/indexStyle.css" s3://%BUCKET_NAME%/indexStyle.css
-                aws s3 cp "Cloud Computing Final Project/script.js" s3://%BUCKET_NAME%/script.js
+                aws s3 cp "Cloud Computing Final Project/Resources/script.js" s3://%BUCKET_NAME%/script.js
                 """
             }
-        }
+        }   
 
         stage('Sync Resources Folder') {
             steps {
@@ -55,5 +55,3 @@ pipeline {
         }
     }
 }
-
-
