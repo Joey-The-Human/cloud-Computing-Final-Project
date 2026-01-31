@@ -6,7 +6,7 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION = 'us-east-2'
         BUCKET_NAME = 'cloud-final-joel'
-        CLOUDFRONT_DIST_ID = 'E293OVOVYITHO5'
+        CLOUDFRONT_DIST_ID = 'E1MXVVTYB34036'
     }
 
     stages {
@@ -22,18 +22,17 @@ pipeline {
         stage('Deploy HTML/CSS/JS to S3') {
             steps {
                 bat """
-                aws s3 cp "Cloud Computing Final Project/index.html" s3://%BUCKET_NAME%/index.html
-                aws s3 cp "Cloud Computing Final Project/indexStyle.css" s3://%BUCKET_NAME%/indexStyle.css
-                aws s3 cp "Cloud Computing Final Project/script.js" s3://%BUCKET_NAME%/script.js
+                aws s3 cp index.html s3://%BUCKET_NAME%/index.html
+                aws s3 cp indexStyle.css s3://%BUCKET_NAME%/indexStyle.css
+                aws s3 cp script.js s3://%BUCKET_NAME%/script.js
                 """
             }
         }
 
-
         stage('Sync Resources Folder') {
             steps {
                 bat """
-                aws s3 sync "Cloud Computing Final Project/Resources" s3://%BUCKET_NAME%/Resources
+                aws s3 sync Resources s3://%BUCKET_NAME%/Resources
                 """
             }
         }
@@ -56,3 +55,4 @@ pipeline {
         }
     }
 }
+
